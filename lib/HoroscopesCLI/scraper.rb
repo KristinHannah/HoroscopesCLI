@@ -4,14 +4,15 @@ require "pry"
 
 class HoroscopesCLI::Scraper 
   
-  def self.getUrl
-    html = Nokogiri::HTML(open("https://www.horoscope.com/us/index.aspx"))
-    html
-  end 
+ # def self.getUrl
+#    html = Nokogiri::HTML(open("https://www.horoscope.com/us/index.aspx"))
+ #   html
+#  end 
   
-  def self.scrape_index_page
+  def scrape_index_page
+    html = Nokogiri::HTML(open("https://www.horoscope.com/us/index.aspx"))
     signs_list = []
-   self.getUrl.css("div.grid.grid-6 a").each do |item|
+    html.css("div.grid.grid-6 a").each do |item|
       signs_list << {
         :sign => item.css('h3').text,
         :url => "https://www.horoscope.com" + item.attribute('href').value,

@@ -13,7 +13,7 @@ class HoroscopesCLI::CLI
   end 
   
   def makeSigns 
-    signs_array = HoroscopesCLI::Scraper.scrape_index_page
+    signs_array = HoroscopesCLI::Scraper.new.scrape_index_page
     HoroscopesCLI::ZodiacSign.create_from_collection(signs_array)
   end 
   
