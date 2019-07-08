@@ -5,7 +5,7 @@ class HoroscopesCLI::CLI
     makeSigns
     add_attributes
     display_signs
-    # welcomeUser
+   #  welcomeUser
    # askBday
   #  daily 
   #  loveScope
@@ -21,6 +21,8 @@ class HoroscopesCLI::CLI
     HoroscopesCLI::ZodiacSign.all.each do |sign|
      attributes = HoroscopesCLI::Scraper.scrape_info(sign)
      sign.add_attributes(attributes)
+     love_atts = HoroscopesCLI::Scraper.scrape_love_info(sign)
+     sign.add_attributes(love_atts)
   end
   end 
   
@@ -31,6 +33,7 @@ class HoroscopesCLI::CLI
       puts " #{signs.url}"
       puts "#{signs.horoscope}"
       puts " #{signs.today_date}"
+      puts " #{signs.love_scope}"
      end
   end
   

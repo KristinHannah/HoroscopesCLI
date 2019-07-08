@@ -33,8 +33,24 @@ class HoroscopesCLI::Scraper
       horoscopeAllText = html.css("div.grid.grid-right-sidebar div p").text
       allTextArray = horoscopeAllText.split(" - ")
       horoscope_text = allTextArray[1]
-      horoscope_split = horoscope_text.split("Confused about")
-      horoscope_only = horoscope_split[0]
+      if horoscope_text.include?("Confused about")
+        horoscope_split = horoscope_text.split("Confused about")
+        horoscope_only = horoscope_split[0]
+      elsif horoscope_text.include?("Discover what's")
+        horoscope_split = horoscope_text.split("Discover what's")
+        horoscope_only = horoscope_split[0]
+      elsif horoscope_text.include?("Dig deep")
+        horoscope_split = horoscope_text.split("Dig deep")
+        horoscope_only = horoscope_split[0]
+      elsif horoscope_text.include?("Revive your love")
+        horoscope_split = horoscope_text.split("Revive your love")
+        horoscope_only = horoscope_split[0]
+      elsif horoscope_text.include?("Get Instant Answers")
+        horoscope_split = horoscope_text.split("Get Instant Answer")
+        horoscope_only = horoscope_split[0]
+      else 
+        horoscope_only = horoscope_text
+      end
    sign_atts[:horoscope] = horoscope_only
    
        link_info = html.css("div.grid.grid-right-sidebar div.more-btns.more-horoscopes a#src-horo-btn-love").attribute('href').value
