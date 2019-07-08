@@ -60,7 +60,7 @@ class HoroscopesCLI::CLI
   
   def currentSign
     puts "Ah... I thought you were a #{@@userSign}."
-    HoroscopesCLI::ZodiacSign.find_by_sign(@@userSign)[0]
+    HoroscopesCLI::ZodiacSign.find_by_sign(@@userSign)
   end 
   
   def daily 

@@ -22,6 +22,6 @@ class HoroscopesCLI::ZodiacSign
   end
   
   def self.find_by_sign(sign)
-    self.all.select {|s| s.sign_name == sign}
+    self.all.find {|s| s.sign_name == sign}
   end 
 end 
