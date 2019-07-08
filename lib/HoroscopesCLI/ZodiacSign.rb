@@ -7,9 +7,8 @@ class HoroscopesCLI::ZodiacSign
     @@all << self
   end 
   
-  def self.allSigns
+  def self.all
     @@all
-    binding.pry
   end 
   
   def self.create_from_collection(signs_array)

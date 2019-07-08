@@ -1,12 +1,38 @@
+
 class HoroscopesCLI::CLI 
   
   def call
-    welcomeUser
-    askBday
-    daily 
-    loveScope
-    bye
+    makeSigns
+    add_attributes
+    display_signs
+    # welcomeUser
+   # askBday
+  #  daily 
+  #  loveScope
+  #  bye
   end 
+  
+  def makeSigns 
+    signs_array = HoroscopesCLI::Scraper.scrape_index_page
+    HoroscopesCLI::ZodiacSign.create_from_collection(signs_array)
+  end 
+  
+  def add_attributes 
+    HoroscopesCLI::ZodiacSign.all.each do |sign|
+     attributes = HoroscopesCLI::Scraper.scrape_info(sign.url)
+     HoroscopesCLI::ZodiacSign.add_attributes(attributes)
+  end
+  end 
+  
+   def display_signs
+    ZodiacSign.all.each do |signs|
+      puts "#{ZodiacSign.sign}"
+      puts " #{ZodiacSign.sign_dates}"
+      puts " #{ZodiacSign.url}"
+      puts "#{ZodiacSign.horoscope}"
+      puts " #{ZodiacSign.today_date}"
+     end
+  end
   
   def welcomeUser
     puts "welcome to Horoscopes CLI, giving you your daily advice from the stars"
@@ -14,7 +40,7 @@ class HoroscopesCLI::CLI
   
   def askBday
     puts "Tell me your birthday to learn your sign. Please input your birthday with the two digit month and two digit day (August 25 would be 08/25)."
-    HoroscopesCLI::ZodiacSign.allSigns
+    HoroscopesCLI::ZodiacSign.all
      input = gets.strip 
       case input 
         when "08/25"
