@@ -4,10 +4,11 @@ class HoroscopesCLI::CLI
   def call
     makeSigns
     add_attributes
-    display_signs
-   #  welcomeUser
-   # askBday
-  #  daily 
+  #  display_signs
+    welcomeUser
+    askSign
+    currentSign
+    daily 
   #  loveScope
   #  bye
   end 
@@ -41,23 +42,32 @@ class HoroscopesCLI::CLI
     puts "welcome to Horoscopes CLI, giving you your daily advice from the stars"
   end 
   
-  def askBday
-    puts "Tell me your birthday to learn your sign. Please input your birthday with the two digit month and two digit day (August 25 would be 08/25)."
-    HoroscopesCLI::ZodiacSign.all
-     input = gets.strip 
-      case input 
-        when "08/25"
-          puts "virgo"
-        when "12/07"
-          puts "sagitarrius"
-      end 
+  def askSign
+    puts "Do you know your sign?(yes/no)"
+    input = gets.strip
+    if input == "yes"
+      puts "Could you tell me what your sign is?"
+      @@userSign = gets.strip 
+    elsif input == "no"
+        puts "I'm going to give you a list of signs and their birthdays"
+        HoroscopesCLI::ZodiacSign.all.each do |zsign|
+       puts "#{zsign.sign} are born from #{zsign.sign_dates}"
+         end 
+        puts "Please tell me your sign"
+        @@userSign = gets.strip
+    end 
+  end 
+  
+  def currentSign
+    puts "Ah... I thought you were a #{@@userSign}."
+    @@userSign
   end 
   
   def daily 
     puts "Would you like to hear your daily general horoscope?"
     input = gets.strip
       if input == "yes" 
-        puts "here is your general horoscope"
+        puts "#{currentSign.horoscope}"
       else 
         puts "okay... moving on"
       end 
