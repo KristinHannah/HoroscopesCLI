@@ -20,17 +20,17 @@ class HoroscopesCLI::CLI
   def add_attributes 
     HoroscopesCLI::ZodiacSign.all.each do |sign|
      attributes = HoroscopesCLI::Scraper.scrape_info(sign)
-     HoroscopesCLI::ZodiacSign.add_attributes(attributes)
+     sign.add_attributes(attributes)
   end
   end 
   
    def display_signs
-    ZodiacSign.all.each do |signs|
-      puts "#{ZodiacSign.sign}"
-      puts " #{ZodiacSign.sign_dates}"
-      puts " #{ZodiacSign.url}"
-      puts "#{ZodiacSign.horoscope}"
-      puts " #{ZodiacSign.today_date}"
+    HoroscopesCLI::ZodiacSign.all.each do |signs|
+      puts "#{signs.sign}"
+      puts " #{signs.sign_dates}"
+      puts " #{signs.url}"
+      puts "#{signs.horoscope}"
+      puts " #{signs.today_date}"
      end
   end
   
