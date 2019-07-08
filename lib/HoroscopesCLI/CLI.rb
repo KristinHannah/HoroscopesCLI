@@ -14,6 +14,7 @@ class HoroscopesCLI::CLI
   
   def askBday
     puts "Tell me your birthday to learn your sign. Please input your birthday with the two digit month and two digit day (August 25 would be 08/25)."
+    HoroscopesCLI::ZodiacSign.allSigns
      input = gets.strip 
       case input 
         when "08/25"
