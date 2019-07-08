@@ -16,5 +16,9 @@ class HoroscopesCLI::ZodiacSign
       self.new(attr)
     end 
   end 
+  
+  def add_attributes(attributes_hash)
+    attributes_hash.each {|key, value| self.send(("#{key}="), value)}
+  end
 
 end 

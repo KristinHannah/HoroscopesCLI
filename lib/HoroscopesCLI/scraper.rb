@@ -22,11 +22,11 @@ class HoroscopesCLI::Scraper
    signs_list
   end
   
-    def self.scrape_info(sign)
-  url = sign.url
-  html = Nokogiri.HTML(open(url))
+  def self.scrape_info(sign)
+     url = sign.url
+     html = Nokogiri.HTML(open(url))
   
-  sign_atts = {}
+    sign_atts = {}
   
    sign_atts[:today_date] = html.css("div.grid.grid-right-sidebar div p strong.date").text
    
@@ -37,14 +37,14 @@ class HoroscopesCLI::Scraper
       horoscope_only = horoscope_split[0]
    sign_atts[:horoscope] = horoscope_only
    
-       sign_atts[:link_info] = html.css("div.grid.grid-right-sidebar div.more-btns.more-horoscopes a#src-horo-btn-love").attribute('href').value
+       link_info = html.css("div.grid.grid-right-sidebar div.more-btns.more-horoscopes a#src-horo-btn-love").attribute('href').value
    sign_atts[:love_link] = "https://www.horoscope.com" + link_info
    
    sign_atts
-   binding.pry
+  # binding.pry
   end
   
-    def self.scrape_love_info(sign)
+  def self.scrape_love_info(sign)
     url = sign.love_link
     html = Nokogiri.HTML(open(url))
    sign_att = {}
@@ -55,6 +55,6 @@ class HoroscopesCLI::Scraper
       horoSplit = horo.split("Meet highly")
    sign_att[:love_scope] = horoSplit[0]
    sign_att
-   binding.pry
+   #binding.pry
   end 
 end 

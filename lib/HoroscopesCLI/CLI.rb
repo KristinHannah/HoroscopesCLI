@@ -19,7 +19,7 @@ class HoroscopesCLI::CLI
   
   def add_attributes 
     HoroscopesCLI::ZodiacSign.all.each do |sign|
-     attributes = HoroscopesCLI::Scraper.scrape_info(sign.url)
+     attributes = HoroscopesCLI::Scraper.scrape_info(sign)
      HoroscopesCLI::ZodiacSign.add_attributes(attributes)
   end
   end 
