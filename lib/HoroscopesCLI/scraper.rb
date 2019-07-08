@@ -68,8 +68,40 @@ class HoroscopesCLI::Scraper
       loveFullText = html.css("div.grid.grid-right-sidebar p").text
       loveArray1 = loveFullText.split(" - ")
       horo = loveArray1[1]
-      horoSplit = horo.split("Meet highly")
-   sign_att[:love_scope] = horoSplit[0]
+      if horo.include?("Find your 2019")
+        horoSplit = horo.split("Find your 2019")
+        love_horo = horoSplit[0]
+      elsif horo.include?("If you're looking for")
+       horoSplit = horo.split("If you're looking for")
+       love_horo = horoSplit[0]
+      elsif horo.include?("Did you know:")
+       horoSplit = horo.split("Did you know:")
+       love_horo = horoSplit[0]
+      elsif horo.include?("If you are looking for")
+       horoSplit = horo.split("If you are looking for")
+       love_horo = horoSplit[0]
+      elsif horo.include?("Make 2019 the year")
+       horoSplit = horo.split("Make 2019 the year")
+       love_horo = horoSplit[0]
+      elsif horo.include?("Meet highly")
+       horoSplit = horo.split("Meet highly")
+       love_horo = horoSplit[0]
+      elsif horo.include?("Every 14 minutes")
+       horoSplit = horo.split("Every 14 minutes")
+       love_horo = horoSplit[0]
+      elsif horo.include?("2019 is all about")
+       horoSplit = horo.split("2019 is all about")
+       love_horo = horoSplit[0]
+      elsif horo.include?("Join eharmony")
+       horoSplit = horo.split("Join eharmony")
+       love_horo = horoSplit[0]
+      elsif horo.include?("Join now for lasting and fulfilling")
+       horoSplit = horo.split("Join now for lasting and fulfilling")
+       love_horo = horoSplit[0]
+     else 
+       love_horo = horo 
+     end 
+   sign_att[:love_scope] = love_horo
    sign_att
    #binding.pry
   end 
