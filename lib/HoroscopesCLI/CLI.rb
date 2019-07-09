@@ -75,11 +75,31 @@ class HoroscopesCLI::CLI
     bdaysplit = bday.split(" ")
     month = bdaysplit[0]
     day = bdaysplit[1].to_i 
-      if month == "May" && day.between?(21, 31) || month == "Jun" && day.between?(1, 20)
+      if month == "May" && day.between?(21, 31) || month == "June" && day.between?(1, 20)
         puts "You are a Gemini"
         @userSign = "Gemini"
+      elsif month == "March" && day.between?(21, 31)  || month == "April" && day.between?(1, 19)
+        puts "You are a Aries"
+        @userSign = "Aries"
+      elsif month = "April" && day.between?(20, 30) || month == "May" && day.between?(1, 20)
+        puts "You are a Taurus"
+        @userSign = "Taurus"
+      elsif month = "June" && day.between?(21, 31) || month == "July" && day.between?(1, 22)
+        puts "You are a Cancer"
+        @userSign = "Cancer"
+     elsif month = "July" && day.between?(23, 31) || month == "August" && day.between?(1, 22)
+        puts "You are a Leo"
+        @userSign = "Leo"
+    elsif month = "August" && day.between?(23, 31) || month == "September" && day.between?(1, 22)
+        puts "You are a Virgo"
+        @userSign = "Virgo"
+    elsif month = "September" && day.between?(23, 31) || month == "October" && day.between?(1, 22)
+        puts "You are a Libra"
+        @userSign = "Libra"
       end 
     end 
+    
+Libra: September 23 – October 22.
   
   def currentSign
     HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
