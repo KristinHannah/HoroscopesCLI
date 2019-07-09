@@ -72,11 +72,12 @@ class HoroscopesCLI::CLI
   def findUserSign
     puts "Please tell me your birthday. Please giv the first 3 letters of the month you were born in, and the day. For example: if your birthday was September 16, 1990, you would type Sep 16."
     bday = gets.strip 
-    month = bday[0...2]
-    day = bday[4...5].to_i 
+    bdaysplit = bday.split(" ")
+    month = bdaysplit[0]
+    day = bdaysplit[1].to_i 
       if month == "May" && day.between?(21, 31) || month == "Jun" && day.between?(1, 20)
         puts "You are a Gemini"
-        userSign = "Gemini"
+        @userSign = "Gemini"
       end 
     end 
   
