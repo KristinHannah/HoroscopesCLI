@@ -51,13 +51,23 @@ class HoroscopesCLI::CLI
     elsif input == "no"
         puts "I'm going to give you a list of signs and their birthdays"
         HoroscopesCLI::ZodiacSign.all.each do |zsign|
-       puts "#{zsign.sign} are born from #{zsign.sign_dates}"
+       puts "#{zsign.sign_name} are born from #{zsign.sign_dates}"
          end 
         puts "Please tell me your sign. Be respectful of your zodiac, and remember to capitalize it's name."
         @@userSign = gets.strip
     end 
     puts "Ah... I thought you were a #{@@userSign}."
   end 
+  
+  def findUserSign
+    puts "Please tell me your birthday. Please giv the first 3 letters of the month you were born in, and the two digit day. For example: if your birthday was September 16, 1990, you would type Sep 16."
+    bday = gets.strip 
+    month = bday[0...2]
+    day = day[4...5].to_i 
+      if bday.starts_with?("May") && bday.ends_with?()
+        
+      end 
+    end 
   
   def currentSign
     HoroscopesCLI::ZodiacSign.find_by_sign(@@userSign)
