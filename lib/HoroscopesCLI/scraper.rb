@@ -46,9 +46,9 @@ class HoroscopesCLI::Scraper
    sign_att = {}
    
       loveHoroscope = html.css("div.grid.grid-right-sidebar p")[0].text
-     end 
    sign_att[:love_scope] = loveHoroscope
    sign_att
    #binding.pry
   end 
+  
 end 

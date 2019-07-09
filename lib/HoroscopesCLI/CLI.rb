@@ -5,9 +5,8 @@ class HoroscopesCLI::CLI
   def call
     makeSigns
     add_attributes
-  #  display_signs
     welcomeUser
-    askSign
+    display_signs
     currentSign
     daily 
     loveScope
@@ -30,13 +29,9 @@ class HoroscopesCLI::CLI
   
    def display_signs
     HoroscopesCLI::ZodiacSign.all.each do |signs|
-      puts "#{signs.sign}"
-      puts " #{signs.sign_dates}"
-      puts " #{signs.url}"
-      puts "#{signs.horoscope}"
-      puts " #{signs.today_date}"
-      puts " #{signs.love_scope}"
+      puts "#{signs.sign_name}"
      end
+     askSign
   end
   
   def userSign=(sign)
