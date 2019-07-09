@@ -9,8 +9,8 @@ class HoroscopesCLI::CLI
     askSign
     currentSign
     daily 
-  #  loveScope
-  #  bye
+    loveScope
+   bye
   end 
   
   def makeSigns 
@@ -46,20 +46,20 @@ class HoroscopesCLI::CLI
     puts "Do you know your sign?(yes/no)"
     input = gets.strip
     if input == "yes"
-      puts "Could you tell me what your sign is?"
+      puts "Could you tell me what your sign is? Be respectful of your zodiac, and remember to capitalize it's name."
       @@userSign = gets.strip 
     elsif input == "no"
         puts "I'm going to give you a list of signs and their birthdays"
         HoroscopesCLI::ZodiacSign.all.each do |zsign|
        puts "#{zsign.sign} are born from #{zsign.sign_dates}"
          end 
-        puts "Please tell me your sign"
+        puts "Please tell me your sign. Be respectful of your zodiac, and remember to capitalize it's name."
         @@userSign = gets.strip
     end 
+    puts "Ah... I thought you were a #{@@userSign}."
   end 
   
   def currentSign
-    puts "Ah... I thought you were a #{@@userSign}."
     HoroscopesCLI::ZodiacSign.find_by_sign(@@userSign)
   end 
   
@@ -77,7 +77,7 @@ class HoroscopesCLI::CLI
     puts "Would you like to hear your daily love horoscope?"
     input = gets.strip
     if input == "yes" 
-      puts "here is your love scope"
+      puts "#{currentSign.love_scope}"
     else 
       puts "That's okay. Some things are better left unknown."
     end 
