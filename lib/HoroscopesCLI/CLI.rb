@@ -99,7 +99,6 @@ class HoroscopesCLI::CLI
       end 
     end 
     
-Libra: September 23 – October 22.
   
   def currentSign
     HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
