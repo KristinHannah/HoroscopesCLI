@@ -1,5 +1,6 @@
 
 class HoroscopesCLI::CLI 
+  attr_accessor :userSign
   
   def call
     makeSigns
@@ -38,6 +39,14 @@ class HoroscopesCLI::CLI
      end
   end
   
+  def userSign=(sign)
+    @userSign = sign
+  end 
+  
+  def userSign
+    @userSign
+  end 
+  
   def welcomeUser
     puts "welcome to Horoscopes CLI, giving you your daily advice from the stars"
   end 
@@ -47,30 +56,32 @@ class HoroscopesCLI::CLI
     input = gets.strip
     if input == "yes"
       puts "Could you tell me what your sign is? Be respectful of your zodiac, and remember to capitalize it's name."
-      @@userSign = gets.strip 
+      @userSign = gets.strip 
     elsif input == "no"
-        puts "I'm going to give you a list of signs and their birthdays"
-        HoroscopesCLI::ZodiacSign.all.each do |zsign|
-       puts "#{zsign.sign_name} are born from #{zsign.sign_dates}"
-         end 
-        puts "Please tell me your sign. Be respectful of your zodiac, and remember to capitalize it's name."
-        @@userSign = gets.strip
+      findUserSign
+     #   puts "I'm going to give you a list of signs and their birthdays"
+     #   HoroscopesCLI::ZodiacSign.all.each do |zsign|
+    #   puts "#{zsign.sign_name} are born from #{zsign.sign_dates}"
+     #    end 
+     #   puts "Please tell me your sign. Be respectful of your zodiac, and remember to capitalize it's name."
+    #    @@userSign = gets.strip
     end 
-    puts "Ah... I thought you were a #{@@userSign}."
+    puts "Ah... I thought you were a #{@userSign}."
   end 
   
   def findUserSign
-    puts "Please tell me your birthday. Please giv the first 3 letters of the month you were born in, and the two digit day. For example: if your birthday was September 16, 1990, you would type Sep 16."
+    puts "Please tell me your birthday. Please giv the first 3 letters of the month you were born in, and the day. For example: if your birthday was September 16, 1990, you would type Sep 16."
     bday = gets.strip 
     month = bday[0...2]
-    day = day[4...5].to_i 
-      if bday.starts_with?("May") && bday.ends_with?()
-        
+    day = bday[4...5].to_i 
+      if month == "May" && day.between?(21, 31) || month == "Jun" && day.between?(1, 20)
+        puts "You are a Gemini"
+        userSign = "Gemini"
       end 
     end 
   
   def currentSign
-    HoroscopesCLI::ZodiacSign.find_by_sign(@@userSign)
+    HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
   end 
   
   def daily 
