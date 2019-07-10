@@ -2,16 +2,33 @@
 class HoroscopesCLI::CLI 
   attr_accessor :userSign
   
+  #userSign Methods 
+  def userSign=(sign)
+    @userSign = sign
+  end 
+  
+  def userSign
+    @userSign
+  end 
+  
+  def currentSign
+    HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
+  end 
+  
+  #call method 
+  
   def call
     makeSigns
     add_attributes
     welcomeUser
-    display_signs
-    currentSign
-    daily 
-    loveScope
-   bye
+   # display_signs
+   # currentSign
+   # daily 
+   # loveScope
+  # bye
   end 
+  
+  #scraping methods
   
   def makeSigns 
     signs_array = HoroscopesCLI::Scraper.new.scrape_index_page
@@ -27,45 +44,36 @@ class HoroscopesCLI::CLI
   end
   end 
   
-   def display_signs
+  #methods the user interacts with
+  
+  def welcomeUser
+    puts "welcome to Horoscopes CLI, giving you your daily advice from the stars"
+    display_signs
+  end 
+  
+  def display_signs
+     puts "Here is a list of the zodiac signs:"
     HoroscopesCLI::ZodiacSign.all.each do |signs|
       puts "#{signs.sign_name}"
      end
      askSign
   end
   
-  def userSign=(sign)
-    @userSign = sign
-  end 
-  
-  def userSign
-    @userSign
-  end 
-  
-  def welcomeUser
-    puts "welcome to Horoscopes CLI, giving you your daily advice from the stars"
-  end 
-  
   def askSign
     puts "Do you know your sign?(yes/no)"
     input = gets.strip
-    if input == "yes"
+    if input == "yes" || input == "Yes" || input == "y" 
       puts "Could you tell me what your sign is? Be respectful of your zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
     elsif input == "no"
       findUserSign
-     #   puts "I'm going to give you a list of signs and their birthdays"
-     #   HoroscopesCLI::ZodiacSign.all.each do |zsign|
-    #   puts "#{zsign.sign_name} are born from #{zsign.sign_dates}"
-     #    end 
-     #   puts "Please tell me your sign. Be respectful of your zodiac, and remember to capitalize it's name."
-    #    @@userSign = gets.strip
     end 
     puts "Ah... I thought you were a #{@userSign}."
+    daily
   end 
   
   def findUserSign
-    puts "Please tell me your birthday. Please giv the first 3 letters of the month you were born in, and the day. For example: if your birthday was September 16, 1990, you would type Sep 16."
+    puts "Please tell me your birthday. Give the full name of the month, and the day. For example: August 25, May 2"
     bday = gets.strip 
     bdaysplit = bday.split(" ")
     month = bdaysplit[0]
@@ -108,30 +116,49 @@ class HoroscopesCLI::CLI
         @userSign = "Pisces"
       end 
     end 
-  
-  def currentSign
-    HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
-  end 
-  
+    
   def daily 
     puts "Would you like to hear your daily general horoscope?"
     input = gets.strip
-      if input == "yes" 
+      if input == "yes" || input == "Yes" || input == "y" 
         puts "#{currentSign.horoscope}"
       else 
         puts "okay... moving on"
       end 
+      loveScope
   end 
   
   def loveScope
     puts "Would you like to hear your daily love horoscope?"
     input = gets.strip
-    if input == "yes" 
+    if input == "yes" || input == "Yes" || input == "y" 
       puts "#{currentSign.love_scope}"
     else 
       puts "That's okay. Some things are better left unknown."
     end 
+    checkAnotherSign
   end 
+  
+  def checkAnotherSign
+    puts "Would you like to check the horoscope for another sign?"
+      input = gets.strip 
+    if input == "yes" || input == "Yes" || input == "y" 
+      puts "Which sign would you like to check? See your choices below:"
+      display_signs
+    elsif input == "no" 
+      exitProgram 
+    end 
+  end 
+  
+  def exitProgram
+    puts "Would you like to exit the program?"
+    exitInput == gets.strip
+    if exitInput == "yes" || exitInput == "Yes" || exitInput == "y" 
+      bye 
+    elsif exitInput == "no"
+     display_signs
+   end 
+  end   
     
     
   def bye 
