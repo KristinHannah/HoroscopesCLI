@@ -65,7 +65,7 @@ class HoroscopesCLI::CLI
     if input == "yes" || input == "Yes" || input == "y" 
       puts "Could you tell me what your sign is? Be respectful of your zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
-    elsif input == "no"
+    elsif exitInput == "no" || exitInput == "No" || exitInput == "n"
       findUserSign
     end 
     puts "Ah... I thought you were a #{@userSign}."
@@ -141,25 +141,24 @@ class HoroscopesCLI::CLI
   
   def checkAnotherSign
     puts "Would you like to check the horoscope for another sign?"
-      input = gets.strip 
-    if input == "yes" || input == "Yes" || input == "y" 
+      checkInput = gets.strip 
+    if checkInput == "yes" || checkInput == "Yes" || checkInput == "y" 
       puts "Which sign would you like to check? See your choices below:"
       display_signs
-    elsif input == "no" 
+    elsif exitInput == "no" || exitInput == "No" || exitInput == "n"
       exitProgram 
     end 
   end 
   
   def exitProgram
-    puts "Would you like to exit the program?"
-    exitInput == gets.strip
+    puts "Would you like to exit the program?(yes/no)"
+    exitInput = gets.strip
     if exitInput == "yes" || exitInput == "Yes" || exitInput == "y" 
       bye 
-    elsif exitInput == "no"
+    elsif exitInput == "no" || exitInput == "No" || exitInput == "n"
      display_signs
    end 
   end   
-    
     
   def bye 
     puts "Check back tomorrow for more from the stars"
