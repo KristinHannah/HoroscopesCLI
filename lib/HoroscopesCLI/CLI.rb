@@ -60,20 +60,20 @@ class HoroscopesCLI::CLI
   end
   
   def askSign
-    puts "Do you know your sign?(yes/no)"
+    puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)"
     input = gets.strip
     if input == "yes" || input == "Yes" || input == "y" 
-      puts "Could you tell me what your sign is? Be respectful of your zodiac, and remember to capitalize it's name."
+      puts "Could you tell me what the sign is? Be respectful of the zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
-    elsif exitInput == "no" || exitInput == "No" || exitInput == "n"
+    elsif input == "no" || input == "No" || input == "n"
       findUserSign
     end 
-    puts "Ah... I thought you were a #{@userSign}."
-    daily
+    puts "Ah... I thought we were talking about a #{@userSign}."
+    dailyScope
   end 
   
   def findUserSign
-    puts "Please tell me your birthday. Give the full name of the month, and the day. For example: August 25, May 2"
+    puts "Please tell me the birthday of the person's sign you'd like to check. Give the full name of the month, and the day. For example: August 25, May 2"
     bday = gets.strip 
     bdaysplit = bday.split(" ")
     month = bdaysplit[0]
@@ -114,48 +114,68 @@ class HoroscopesCLI::CLI
     elsif month == "February" && day.between?(19, 29) || month == "March" && day.between?(1, 20)
         puts "You are a Pisces"
         @userSign = "Pisces"
+    elsif bday == "exit" || bday == "exit"
+      exitProgram
+    else 
+      puts "I didn't quite get that. Are you sure you capitalized the month and spelled it correctly?"
+      findUserSign
       end 
     end 
     
-  def daily 
-    puts "Would you like to hear your daily general horoscope?"
+  def dailyScope
+    puts "Would you like to hear the daily general horoscope for #{userSign}?(yes/no)"
     input = gets.strip
       if input == "yes" || input == "Yes" || input == "y" 
         puts "#{currentSign.horoscope}"
-      else 
+        loveScope
+      elsif input == "no" || input == "No" || input == "n" 
         puts "okay... moving on"
+        loveScope
+      elsif input == "exit" || input == "Exit"
+        exitProgram
+      else 
+       puts "I'm not sure what you're trying to tell me..."
+       loveScope
       end 
-      loveScope
   end 
   
   def loveScope
-    puts "Would you like to hear your daily love horoscope?"
+    puts "Would you like to hear the daily love horoscope for #{userSign}?(yes/no)"
     input = gets.strip
     if input == "yes" || input == "Yes" || input == "y" 
       puts "#{currentSign.love_scope}"
-    else 
+      checkAnotherSign
+    elsif input == "no" || input == "No" || input == "n" 
       puts "That's okay. Some things are better left unknown."
+      checkAnotherSign
+    elsif input == "exit" || input == "Exit"
+      exitProgram
+    else 
+      puts "I'm not sure what you're trying to tell me..."
+      loveScope
     end 
-    checkAnotherSign
   end 
   
   def checkAnotherSign
-    puts "Would you like to check the horoscope for another sign?"
-      checkInput = gets.strip 
-    if checkInput == "yes" || checkInput == "Yes" || checkInput == "y" 
+    puts "Would you like to check the horoscope for another sign?(yes/no)"
+      input = gets.strip 
+    if input == "yes" || input == "Yes" || input == "y" 
       puts "Which sign would you like to check? See your choices below:"
       display_signs
-    elsif exitInput == "no" || exitInput == "No" || exitInput == "n"
+    elsif input == "no" || input == "No" || input == "n" || input == "exit" || input == "Exit"
       exitProgram 
+    else 
+      puts "I'm not sure what you mean..."
+      checkAnotherSign
     end 
   end 
   
   def exitProgram
     puts "Would you like to exit the program?(yes/no)"
-    exitInput = gets.strip
-    if exitInput == "yes" || exitInput == "Yes" || exitInput == "y" 
+    input = gets.strip
+    if input == "yes" || input == "Yes" || input == "y" 
       bye 
-    elsif exitInput == "no" || exitInput == "No" || exitInput == "n"
+    elsif input == "no" || input == "No" || input == "n"
      display_signs
    end 
   end   
