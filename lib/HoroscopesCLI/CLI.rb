@@ -76,24 +76,38 @@ class HoroscopesCLI::CLI
       elsif month == "March" && day.between?(21, 31)  || month == "April" && day.between?(1, 19)
         puts "You are a Aries"
         @userSign = "Aries"
-      elsif month = "April" && day.between?(20, 30) || month == "May" && day.between?(1, 20)
+      elsif month == "April" && day.between?(20, 30) || month == "May" && day.between?(1, 20)
         puts "You are a Taurus"
         @userSign = "Taurus"
-      elsif month = "June" && day.between?(21, 31) || month == "July" && day.between?(1, 22)
+      elsif month == "June" && day.between?(21, 31) || month == "July" && day.between?(1, 22)
         puts "You are a Cancer"
         @userSign = "Cancer"
-     elsif month = "July" && day.between?(23, 31) || month == "August" && day.between?(1, 22)
+     elsif month == "July" && day.between?(23, 31) || month == "August" && day.between?(1, 22)
         puts "You are a Leo"
         @userSign = "Leo"
-    elsif month = "August" && day.between?(23, 31) || month == "September" && day.between?(1, 22)
+    elsif month == "August" && day.between?(23, 31) || month == "September" && day.between?(1, 22)
         puts "You are a Virgo"
         @userSign = "Virgo"
-    elsif month = "September" && day.between?(23, 31) || month == "October" && day.between?(1, 22)
+    elsif month == "September" && day.between?(23, 31) || month == "October" && day.between?(1, 22)
         puts "You are a Libra"
         @userSign = "Libra"
+    elsif month == "October" && day.between?(23, 31) || month == "November" && day.between?(1, 21)
+        puts "You are a Scorpio"
+        @userSign = "Scorpio"
+     elsif month == "November" && day.between?(22, 31) || month == "December" && day.between?(1, 21)
+        puts "You are a Sagittarius"
+        @userSign = "Sagittarius"
+    elsif month == "December" && day.between?(22, 31) || month == "January" && day.between?(1, 19)
+        puts "You are a Capricorn"
+        @userSign = "Capricorn"
+    elsif month == "January" && day.between?(20, 31) || month == "February" && day.between?(1, 18)
+        puts "You are a Aquarius"
+        @userSign = "Aquarius"
+    elsif month == "February" && day.between?(19, 29) || month == "March" && day.between?(1, 20)
+        puts "You are a Pisces"
+        @userSign = "Pisces"
       end 
     end 
-    
   
   def currentSign
     HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
