@@ -60,16 +60,40 @@ class HoroscopesCLI::CLI
   end
   
   def askSign
-    puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)"
+    puts "Do you know your sign?(yes/no)"
     input = gets.strip
     if input == "yes" || input == "Yes" || input == "y" 
-      puts "Could you tell me what the sign is? Be respectful of the zodiac, and remember to capitalize it's name."
+      puts "Could you tell me what your sign is? Be respectful of the zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
+      puts "Ah... I thought you were a #{@userSign}."
+      dailyScope
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
+      puts "Ah... I thought you were a #{@userSign}."
+      dailyScope
+    else 
+      puts "I'm not sure I know what you mean."
+      askSign
     end 
-    puts "Ah... I thought we were talking about a #{@userSign}."
-    dailyScope
+  end 
+  
+  def newSign
+    puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)"
+      input = gets.strip
+     if input == "yes" || input == "Yes" || input == "y" 
+      puts "Could you tell me what the sign is? Be respectful of the zodiac, and remember to capitalize it's name."
+      @userSign = gets.strip 
+      puts "Ooh.. a #{userSign}."
+      dailyScope
+    elsif input == "no" || input == "No" || input == "n"
+      findUserSign
+      puts "Ooh.. a #{userSign}."
+      dailyScope
+    else 
+      puts "The stars might understand you, but I sure don't"
+      newSign
+    end 
+    input = nil 
   end 
   
   def findUserSign
@@ -160,8 +184,7 @@ class HoroscopesCLI::CLI
     puts "Would you like to check the horoscope for another sign?(yes/no)"
       input = gets.strip 
     if input == "yes" || input == "Yes" || input == "y" 
-      puts "Which sign would you like to check? See your choices below:"
-      display_signs
+      newSign
     elsif input == "no" || input == "No" || input == "n" || input == "exit" || input == "Exit"
       exitProgram 
     else 
