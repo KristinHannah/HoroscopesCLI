@@ -16,7 +16,6 @@ class HoroscopesCLI::CLI
   end 
   
   #call method 
-  
   def call
     makeSigns
     add_attributes
@@ -47,8 +46,18 @@ class HoroscopesCLI::CLI
   #methods the user interacts with
   
   def welcomeUser
-    puts "welcome to Horoscopes CLI, giving you your daily advice from the stars"
-    display_signs
+    puts "Welcome to Horoscopes CLI, giving you your daily advice from the stars. Would you like to see a list of the zodiac signs?(yes/no)"
+    input = gets.strip 
+    if input == "yes" || input == "Yes" || input == "y"
+      display_signs
+    elsif input == "no" || input == "No" || input == "n"
+      askSign 
+    elsif input == "exit" || input == "Exit"
+      exitProgram
+    else 
+      puts "Let's try that again..."
+      welcomeUser
+    end 
   end 
   
   def display_signs
@@ -69,8 +78,12 @@ class HoroscopesCLI::CLI
       dailyScope
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
-      puts "Ah... I thought you were a #{@userSign}."
-      dailyScope
+        if @bday == "exit" || @bday == "exit"
+          exitProgram
+        else 
+           puts "Ah... I thought you were a #{@userSign}."
+          dailyScope
+        end 
     else 
       puts "I'm not sure I know what you mean."
       askSign
@@ -87,8 +100,12 @@ class HoroscopesCLI::CLI
       dailyScope
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
-      puts "Ooh.. a #{userSign}."
-      dailyScope
+        if @bday == "exit" || @bday == "exit"
+          exitProgram
+        else 
+          puts "Ooh.. a #{userSign}."
+          dailyScope
+        end 
     else 
       puts "The stars might understand you, but I sure don't"
       newSign
@@ -99,6 +116,7 @@ class HoroscopesCLI::CLI
   def findUserSign
     puts "Please tell me the birthday of the person's sign you'd like to check. Give the full name of the month, and the day. For example: August 25, May 2"
     bday = gets.strip 
+    @bday = bday
     bdaysplit = bday.split(" ")
     month = bdaysplit[0]
     day = bdaysplit[1].to_i 
@@ -139,7 +157,6 @@ class HoroscopesCLI::CLI
         puts "You are a Pisces"
         @userSign = "Pisces"
     elsif bday == "exit" || bday == "exit"
-      exitProgram
     else 
       puts "I didn't quite get that. Are you sure you capitalized the month and spelled it correctly?"
       findUserSign
@@ -199,7 +216,7 @@ class HoroscopesCLI::CLI
     if input == "yes" || input == "Yes" || input == "y" 
       bye 
     elsif input == "no" || input == "No" || input == "n"
-     display_signs
+     checkAnotherSign
    end 
   end   
     
