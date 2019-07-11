@@ -20,11 +20,6 @@ class HoroscopesCLI::CLI
     makeSigns
     add_attributes
     welcomeUser
-   # display_signs
-   # currentSign
-   # daily 
-   # loveScope
-  # bye
   end 
   
   #scraping methods
@@ -47,7 +42,7 @@ class HoroscopesCLI::CLI
   
   def welcomeUser
     puts "Welcome to Horoscopes CLI, giving you your daily advice from the stars. Would you like to see a list of the zodiac signs?(yes/no)"
-    input = gets.strip 
+    input = gets.chomp 
     if input == "yes" || input == "Yes" || input == "y"
       display_signs
     elsif input == "no" || input == "No" || input == "n"
@@ -84,6 +79,8 @@ class HoroscopesCLI::CLI
            puts "Ah... I thought you were a #{@userSign}."
           dailyScope
         end 
+    elsif input == "exit" || input == "Exit"
+      exitProgram
     else 
       puts "I'm not sure I know what you mean."
       askSign
