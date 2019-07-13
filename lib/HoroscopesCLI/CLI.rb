@@ -58,7 +58,7 @@ class HoroscopesCLI::CLI
   
   def display_signs
      puts "Here is a list of the zodiac signs:"
-    HoroscopesCLI::ZodiacSign.all.each do |signs|
+     HoroscopesCLI::ZodiacSign.all.each do |signs|
       puts "#{signs.sign_name}"
      end
      askSign
@@ -71,7 +71,6 @@ class HoroscopesCLI::CLI
       puts "Could you tell me what your sign is? Be respectful of the zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
       puts "Ah... I thought you were a #{@userSign}."
-    #  dailyScope
       horoscopeChoice
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
@@ -79,7 +78,6 @@ class HoroscopesCLI::CLI
           exitProgram
         else 
            puts "Ah... I thought you were a #{@userSign}."
-          #dailyScope
           horoscopeChoice
         end 
     elsif input == "exit" || input == "Exit"
@@ -184,40 +182,6 @@ class HoroscopesCLI::CLI
      end 
    end 
     
-  def dailyScope
-    puts "Would you like to hear the daily general horoscope for #{userSign}?(yes/no)"
-    input = gets.strip
-      if input == "yes" || input == "Yes" || input == "y" 
-        puts "#{currentSign.horoscope}"
-        loveScope
-      elsif input == "no" || input == "No" || input == "n" 
-        puts "okay... moving on"
-        loveScope
-      elsif input == "exit" || input == "Exit"
-        exitProgram
-      else 
-       puts "I'm not sure what you're trying to tell me..."
-       loveScope
-      end 
-  end 
-  
-  def loveScope
-    puts "Would you like to hear the daily love horoscope for #{userSign}?(yes/no)"
-    input = gets.strip
-    if input == "yes" || input == "Yes" || input == "y" 
-      puts "#{currentSign.love_scope}"
-      checkAnotherSign
-    elsif input == "no" || input == "No" || input == "n" 
-      puts "That's okay. Some things are better left unknown."
-      checkAnotherSign
-    elsif input == "exit" || input == "Exit"
-      exitProgram
-    else 
-      puts "I'm not sure what you're trying to tell me..."
-      loveScope
-    end 
-  end 
-  
   def checkAnotherSign
     puts "Would you like to check the horoscope for another sign?(yes/no)"
       input = gets.strip 
