@@ -16,6 +16,7 @@ class HoroscopesCLI::CLI
   end 
   
   #call method 
+  
   def call
     makeSigns
     add_attributes
@@ -70,14 +71,16 @@ class HoroscopesCLI::CLI
       puts "Could you tell me what your sign is? Be respectful of the zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
       puts "Ah... I thought you were a #{@userSign}."
-      dailyScope
+    #  dailyScope
+      horoscopeChoice
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
         if @bday == "exit" || @bday == "exit"
           exitProgram
         else 
            puts "Ah... I thought you were a #{@userSign}."
-          dailyScope
+          #dailyScope
+          horoscopeChoice
         end 
     elsif input == "exit" || input == "Exit"
       exitProgram
@@ -94,14 +97,14 @@ class HoroscopesCLI::CLI
       puts "Could you tell me what the sign is? Be respectful of the zodiac, and remember to capitalize it's name."
       @userSign = gets.strip 
       puts "Ooh.. a #{userSign}."
-      dailyScope
+     horoscopeChoice
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
         if @bday == "exit" || @bday == "exit"
           exitProgram
         else 
           puts "Ooh.. a #{userSign}."
-          dailyScope
+         horoscopeChoice
         end 
     else 
       puts "The stars might understand you, but I sure don't"
@@ -159,6 +162,27 @@ class HoroscopesCLI::CLI
       findUserSign
       end 
     end 
+    
+  def horoscopeChoice
+    puts "Would you like to hear your general horoscope, love horoscope or both?(general/love/both)"
+    input = gets.strip 
+     if input == "general" || input == "General" 
+        puts "#{currentSign.horoscope}"
+        checkAnotherSign
+      elsif input == "love" || input == "Love"
+        puts "#{currentSign.love_scope}"
+        checkAnotherSign
+      elsif input == "both" || input == "Both"
+        puts "Here is your general horoscope: #{currentSign.horoscope}"
+        puts "Here is your love horoscope: #{currentSign.love_scope}"
+        checkAnotherSign
+      elsif input == "exit" || input == "Exit"
+        exitProgram
+      else 
+       puts "I'm not sure what you're trying to tell me..."
+       horoscopeChoice
+     end 
+   end 
     
   def dailyScope
     puts "Would you like to hear the daily general horoscope for #{userSign}?(yes/no)"

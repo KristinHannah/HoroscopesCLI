@@ -13,11 +13,12 @@ class HoroscopesCLI::Scraper
     html = Nokogiri::HTML(open("https://www.horoscope.com/us/index.aspx"))
     signs_list = []
     html.css("div.grid.grid-6 a").each do |item|
-      signs_list << {
+     signs_list << {
         :sign_name => item.css('h3').text,
         :url => "https://www.horoscope.com" + item.attribute('href').value,
         :sign_dates => item.css('p').text
       }
+
     end
    signs_list
   end
