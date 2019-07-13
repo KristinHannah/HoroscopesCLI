@@ -101,7 +101,7 @@ class HoroscopesCLI::CLI
         if @bday == "exit" || @bday == "exit"
           exitProgram
         else 
-          puts "Ooh.. a #{userSign}."
+          puts "Ooh.. a #{userSign}.".colorize(:magenta)
          horoscopeChoice
         end 
     else 
