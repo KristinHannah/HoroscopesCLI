@@ -6,23 +6,16 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'HoroscopesCLI'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install HoroscopesCLI
+1. Go to https://github.com/KristinHannah/HoroscopesCLI
+2. Press the green "Clone or Download" button on the right side of the package
+3. Download to your computer
 
 ## Usage
 
-TODO: Write usage instructions here
+1. Once download, open your terminal 
+2. CD into the HoroscopesCLI file where you've saved it on your computer
+3. Type "bin/run" to start the application
+4. Follow the prompts
 
 ## Development
 
