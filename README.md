@@ -1,8 +1,6 @@
 # HoroscopesCLI
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/HoroscopesCLI`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This CLI was created to show daily horoscopes for all of the signs. The horoscopes come from www.horoscope.com. If you're unsure of your sign, you can find out using the CLI by inputting your birthday. You can hear your general daily horoscope, your love horoscope, or both. You can check your friends' horoscopes too. 
 
 ## Installation
 
@@ -12,8 +10,8 @@ TODO: Delete this and the text above, and describe your gem
 
 ## Usage
 
-1. Once download, open your terminal 
-2. CD into the HoroscopesCLI file where you've saved it on your computer
+1. Once the HoroscopesCLI is downloaded, open your terminal 
+2. Change directories into the HoroscopesCLI file where you've saved it on your computer
 3. Type "bin/run" to start the application
 4. Follow the prompts
 
