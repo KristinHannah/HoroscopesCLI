@@ -150,7 +150,7 @@ class HoroscopesCLI::CLI
     end 
     
   def horoscopeChoice
-    puts "Would you like to hear your general horoscope, love horoscope or both?(general/love/both)".colorize(:magenta)
+    puts "Would you like to hear your general horoscope, love horoscope or both for #{currentSign.today_date}?(general/love/both)".colorize(:magenta)
     input = gets.strip 
      if input == "general" || input == "General" 
         puts "#{currentSign.horoscope}".colorize(:magenta)
