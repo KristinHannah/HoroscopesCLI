@@ -1,7 +1,3 @@
-require "nokogiri"
-require "open-uri"
-require "pry"
-
 class HoroscopesCLI::Scraper 
   
   def scrape_index_page

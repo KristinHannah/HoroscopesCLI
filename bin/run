@@ -2,7 +2,4 @@
 
 require_relative "../lib/environment"
 
-#app = CLI.new 
-#app.run
-
 HoroscopesCLI::CLI.new.call
