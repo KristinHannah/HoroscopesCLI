@@ -68,9 +68,15 @@ class HoroscopesCLI::CLI
     input = gets.strip
     if input == "yes" || input == "Yes" || input == "y" 
       puts "Could you tell me what your sign is? Be respectful of the zodiac, and remember to capitalize it's name.".colorize(:magenta)
-      @userSign = gets.strip 
-      puts "Ah... I thought you were a #{@userSign}.".colorize(:magenta)
-      horoscopeChoice
+             sign = gets.strip
+             if HoroscopesCLI::ZodiacSign.find_by_sign(sign)
+                @userSign = sign 
+                puts "Ah... I thought you were a #{@userSign}.".colorize(:magenta)
+                horoscopeChoice
+             else 
+               puts "hmm.. Let's try again".colorize(:magenta)
+               askSign
+             end 
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
         if @bday == "exit" || @bday == "exit"
@@ -92,9 +98,15 @@ class HoroscopesCLI::CLI
       input = gets.strip
      if input == "yes" || input == "Yes" || input == "y" 
       puts "Could you tell me what the sign is? Be respectful of the zodiac, and remember to capitalize it's name.".colorize(:magenta)
-      @userSign = gets.strip 
-      puts "Ooh.. a #{userSign}.".colorize(:magenta)
-     horoscopeChoice
+          sign = gets.strip
+          if HoroscopesCLI::ZodiacSign.find_by_sign(sign)
+            @userSign = sign 
+            puts "Ah... I thought you were a #{@userSign}.".colorize(:magenta)
+            horoscopeChoice
+          else 
+            puts "hmm.. Let's try again".colorize(:magenta)
+            newSign
+            end 
     elsif input == "no" || input == "No" || input == "n"
       findUserSign
         if @bday == "exit" || @bday == "exit"
