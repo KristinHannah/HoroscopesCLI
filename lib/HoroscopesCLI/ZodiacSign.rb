@@ -3,7 +3,7 @@ class HoroscopesCLI::ZodiacSign
   @@all = []
   
   def initialize(sign_hash)
-    sign_hash.each {|key, value| self.send(("#{key}="), value)}
+    sign_hash.each {|key, value| self.send(("#{key}="), value.downcase)}
     @@all << self
   end 
   
