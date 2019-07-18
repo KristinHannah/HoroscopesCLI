@@ -11,7 +11,6 @@ class HoroscopesCLI::CLI
   
   def call
     make_signs
-   # add_attributes
     welcome_user
   end 
   
@@ -22,48 +21,11 @@ class HoroscopesCLI::CLI
     HoroscopesCLI::ZodiacSign.create_from_collection(signs_array)
   end 
   
-#make it so this isn't called until user makes a selection, check if the attributes are there- if not scrape them
-#change to snake_case
-#slack by end of day Friday 
-
   def add_attributes(sign)
     HoroscopesCLI::ZodiacSign.check_scope(sign)
   end 
   
-  
-  def add_attributes1 
-    HoroscopesCLI::ZodiacSign.all.each do |sign|
-     attributes = HoroscopesCLI::Scraper.scrape_info(sign)
-     sign.add_attributes(attributes)
-     love_atts = HoroscopesCLI::Scraper.scrape_love_info(sign)
-     sign.add_attributes(love_atts)
-  end
-  end 
-  
-  #methods the user interacts with
-  
-  def welcome_user
-    puts "Welcome to Horoscopes CLI, giving you your daily advice from the stars. Would you like to see a list of the zodiac signs?(yes/no)".colorize(:magenta)
-    input = gets.chomp 
-    if yes?(input)
-      display_signs
-    elsif no?(input)
-      ask_sign 
-    elsif user_exit?(input)
-      exit_program
-    else 
-      puts "Let's try that again...".colorize(:magenta)
-      welcome_user
-    end 
-  end 
-  
-  def display_signs
-     puts "Here is a list of the zodiac signs:".colorize(:magenta)
-     HoroscopesCLI::ZodiacSign.all.each do |signs|
-      puts "#{signs.sign_name}".colorize(:magenta)
-     end
-     ask_sign
-  end
+  #reused input methods
   
   def yes?(input)
     if input == "yes" || input == "Yes" || input == "y" 
@@ -103,6 +65,31 @@ class HoroscopesCLI::CLI
             end 
   end 
   
+  #methods the user interacts with
+  
+  def welcome_user
+    puts "Welcome to Horoscopes CLI, giving you your daily advice from the stars. Would you like to see a list of the zodiac signs?(yes/no)".colorize(:magenta)
+    input = gets.chomp 
+    if yes?(input)
+      display_signs
+    elsif no?(input)
+      ask_sign 
+    elsif user_exit?(input)
+      exit_program
+    else 
+      puts "Let's try that again...".colorize(:magenta)
+      welcome_user
+    end 
+  end 
+  
+  def display_signs
+     puts "Here is a list of the zodiac signs:".colorize(:magenta)
+     HoroscopesCLI::ZodiacSign.all.each do |signs|
+      puts "#{signs.sign_name}".colorize(:magenta)
+     end
+     ask_sign
+  end
+  
   def ask_sign
     puts "Do you know your sign?(yes/no)".colorize(:magenta)
     input = gets.strip
@@ -113,7 +100,7 @@ class HoroscopesCLI::CLI
         if @bday == "exit" || @bday == "exit"
           exit_program
         else 
-           puts "Ah... I thought you were a #{@userSign}.".colorize(:magenta)
+           puts "Ah... I thought you were a #{@user_sign}.".colorize(:magenta)
           horoscope_choice
         end 
     elsif user_exit?(input)
@@ -123,27 +110,7 @@ class HoroscopesCLI::CLI
       ask_sign
     end 
   end 
-  
-  def new_sign
-    puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)".colorize(:magenta)
-      input = gets.strip
-     if yes?(input)
-      sign_prompt
-    elsif no?(input)
-      find_user_sign
-        if @bday == "exit" || @bday == "exit"
-          exit_program
-        else 
-          puts "Ooh.. a #{userSign}.".colorize(:magenta)
-         horoscope_choice
-        end 
-    else 
-      puts "The stars might understand you, but I sure don't".colorize(:magenta)
-      new_sign
-    end 
-    input = nil 
-  end 
-  
+              
   def find_user_sign
     puts "Please tell me the birthday of the person's sign you'd like to check. Give the full name of the month, and the day. For example: August 25, May 2".colorize(:magenta)
     bday = gets.strip 
@@ -152,48 +119,49 @@ class HoroscopesCLI::CLI
     month = bdaysplit[0]
     day = bdaysplit[1].to_i 
       if month == "May" && day.between?(21, 31) || month == "June" && day.between?(1, 20)
-        @userSign = "Gemini"
+        @user_sign = "gemini"
       elsif month == "March" && day.between?(21, 31)  || month == "April" && day.between?(1, 19)
-        @userSign = "Aries"
+        @user_sign = "aries"
       elsif month == "April" && day.between?(20, 30) || month == "May" && day.between?(1, 20)
-        @userSign = "Taurus"
+        @user_sign = "taurus"
       elsif month == "June" && day.between?(21, 31) || month == "July" && day.between?(1, 22)
-        @userSign = "Cancer"
+       @user_sign = "cancer"
      elsif month == "July" && day.between?(23, 31) || month == "August" && day.between?(1, 22)
-        @userSign = "Leo"
+        @user_sign = "leo"
     elsif month == "August" && day.between?(23, 31) || month == "September" && day.between?(1, 22)
-        @userSign = "Virgo"
+        @user_sign = "virgo"
     elsif month == "September" && day.between?(23, 31) || month == "October" && day.between?(1, 22)
-        @userSign = "Libra"
+        @user_sign = "libra"
     elsif month == "October" && day.between?(23, 31) || month == "November" && day.between?(1, 21)
-        @userSign = "Scorpio"
+        @user_sign = "scorpio"
      elsif month == "November" && day.between?(22, 31) || month == "December" && day.between?(1, 21)
-        @userSign = "Sagittarius"
+        @user_sign = "sagittarius"
     elsif month == "December" && day.between?(22, 31) || month == "January" && day.between?(1, 19)
-        @userSign = "Capricorn"
+        @user_sign = "capricorn"
     elsif month == "January" && day.between?(20, 31) || month == "February" && day.between?(1, 18)
-        @userSign = "Aquarius"
+        @user_sign = "aquarius"
     elsif month == "February" && day.between?(19, 29) || month == "March" && day.between?(1, 20)
-        @userSign = "Pisces"
+        @user_sign = "pisces"
     elsif bday == "exit" || bday == "exit"
     else 
       puts "I didn't quite get that. Are you sure you capitalized the month and spelled it correctly?".colorize(:magenta)
       find_user_sign
       end 
+     add_attributes(@user_sign)
     end 
     
   def horoscope_choice
     puts "Would you like to hear the general horoscope, love horoscope or both for #{current_sign.today_date}?(general/love/both)".colorize(:magenta)
     input = gets.strip 
      if input == "general" || input == "General" 
-        puts "#{currentSign.horoscope}".colorize(:magenta)
-        checkAnotherSign
+        puts "#{current_sign.horoscope}".colorize(:magenta)
+        check_another_sign
       elsif input == "love" || input == "Love"
-        puts "#{currentSign.love_scope}".colorize(:magenta)
-        checkAnotherSign
+        puts "#{current_sign.love_scope}".colorize(:magenta)
+        check_another_sign
       elsif input == "both" || input == "Both"
-        puts "Here is your general horoscope: #{currentSign.horoscope}".colorize(:magenta)
-        puts "Here is your love horoscope: #{currentSign.love_scope}".colorize(:magenta)
+        puts "Here is your general horoscope: #{current_sign.horoscope}".colorize(:magenta)
+        puts "Here is your love horoscope: #{current_sign.love_scope}".colorize(:magenta)
         check_another_sign
       elsif input == "exit" || input == "Exit"
         exit_program
@@ -214,6 +182,26 @@ class HoroscopesCLI::CLI
       puts "I'm not sure what you mean...".colorize(:magenta)
       check_another_sign
     end 
+  end 
+  
+   def new_sign
+    puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)".colorize(:magenta)
+      input = gets.strip
+     if yes?(input)
+      sign_prompt
+    elsif no?(input)
+      find_user_sign
+        if @bday == "exit" || @bday == "exit"
+          exit_program
+        else 
+          puts "Ooh.. a #{user_sign}.".colorize(:magenta)
+         horoscope_choice
+        end 
+    else 
+      puts "The stars might understand you, but I sure don't".colorize(:magenta)
+      new_sign
+    end 
+    input = nil 
   end 
   
   def exit_program

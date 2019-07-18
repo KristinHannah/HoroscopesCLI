@@ -32,9 +32,9 @@ class HoroscopesCLI::ZodiacSign
   def self.check_scope(sign)
    sign = self.find_by_sign(sign)
     if !sign.horoscope
-     attributes = HoroscopesCLI::Scraper.scrape_info(sign.sign_name)
+     attributes = HoroscopesCLI::Scraper.scrape_info(sign)
      sign.add_attributes(attributes)
-     love_atts = HoroscopesCLI::Scraper.scrape_love_info(sign.sign_name)
+     love_atts = HoroscopesCLI::Scraper.scrape_love_info(sign)
      sign.add_attributes(love_atts)
    end 
  end 

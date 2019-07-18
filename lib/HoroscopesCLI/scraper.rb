@@ -21,8 +21,8 @@ class HoroscopesCLI::Scraper
   
    sign_atts[:today_date] = html.css("div.grid.grid-right-sidebar div p strong.date").text
    
-      generalHoroscope = html.css("div.grid.grid-right-sidebar div p")[0].text.split(" - ")
-      daily = generalHoroscope[1] 
+      general_horoscope = html.css("div.grid.grid-right-sidebar div p")[0].text.split(" - ")
+      daily = general_horoscope[1] 
    sign_atts[:horoscope] = daily
    
        link_info = html.css("div.grid.grid-right-sidebar div.more-btns.more-horoscopes a#src-horo-btn-love").attribute('href').value
