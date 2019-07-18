@@ -52,12 +52,12 @@ class HoroscopesCLI::CLI
   end 
   
   def sign_prompt
-      puts "Could you tell me what your sign is?".colorize(:magenta)
-            sign = gets.strip
+      puts "Could you tell me what the sign is?".colorize(:magenta)
+            sign = gets.strip.downcase
             if HoroscopesCLI::ZodiacSign.find_by_sign(sign)
               @user_sign = sign 
               add_attributes(sign)
-              puts "Ah... I thought you were a #{@user_sign}.".colorize(:magenta)
+              puts "Ah... I thought this was a #{@user_sign}.".colorize(:magenta)
               horoscope_choice
             else 
              puts "hmm.. Let's try again".colorize(:magenta)
