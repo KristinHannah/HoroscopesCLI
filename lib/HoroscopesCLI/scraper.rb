@@ -36,8 +36,8 @@ class HoroscopesCLI::Scraper
     html = Nokogiri.HTML(open(url))
     
    sign_att = {}
-      loveHoroscope = html.css("div.grid.grid-right-sidebar p")[0].text.split(" - ")
-      love = loveHoroscope[1]
+      love_horoscope = html.css("div.grid.grid-right-sidebar p")[0].text.split(" - ")
+      love = love_horoscope[1]
    sign_att[:love_scope] = love
    
    sign_att

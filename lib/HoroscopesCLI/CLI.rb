@@ -22,7 +22,7 @@ class HoroscopesCLI::CLI
   end 
   
   def add_attributes(sign)
-    HoroscopesCLI::ZodiacSign.check_scope(sign)
+    HoroscopesCLI::ZodiacSign.check_scope_att(sign)
   end 
   
   #reused input methods

@@ -29,7 +29,7 @@ class HoroscopesCLI::ZodiacSign
     self.all.find {|s| s.sign_name == sign}
   end 
   
-  def self.check_scope(sign)
+  def self.check_scope_att(sign)
    sign = self.find_by_sign(sign)
     if !sign.horoscope
      attributes = HoroscopesCLI::Scraper.scrape_info(sign)
