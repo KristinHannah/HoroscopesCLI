@@ -28,4 +28,15 @@ class HoroscopesCLI::ZodiacSign
   def self.find_by_sign(sign)
     self.all.find {|s| s.sign_name == sign}
   end 
+  
+  def self.check_scope(sign)
+   sign = self.find_by_sign(sign)
+    if !sign.horoscope
+     attributes = HoroscopesCLI::Scraper.scrape_info(sign.sign_name)
+     sign.add_attributes(attributes)
+     love_atts = HoroscopesCLI::Scraper.scrape_love_info(sign.sign_name)
+     sign.add_attributes(love_atts)
+   end 
+ end 
+ 
 end 

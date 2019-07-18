@@ -26,7 +26,12 @@ class HoroscopesCLI::CLI
 #change to snake_case
 #slack by end of day Friday 
 
-  def add_attributes 
+  def add_attributes(sign)
+    HoroscopesCLI::ZodiacSign.check_scope(sign)
+  end 
+  
+  
+  def add_attributes1 
     HoroscopesCLI::ZodiacSign.all.each do |sign|
      attributes = HoroscopesCLI::Scraper.scrape_info(sign)
      sign.add_attributes(attributes)
@@ -43,12 +48,12 @@ class HoroscopesCLI::CLI
     if yes?(input)
       display_signs
     elsif no?(input)
-      askSign 
+      ask_sign 
     elsif user_exit?(input)
-      exitProgram
+      exit_program
     else 
       puts "Let's try that again...".colorize(:magenta)
-      welcomeUser
+      welcome_user
     end 
   end 
   
@@ -85,12 +90,13 @@ class HoroscopesCLI::CLI
   end 
   
   def sign_prompt
-      puts "Could you tell me what your sign is? Be respectful of the zodiac.".colorize(:magenta)
+      puts "Could you tell me what your sign is?".colorize(:magenta)
             sign = gets.strip
             if HoroscopesCLI::ZodiacSign.find_by_sign(sign)
-              @userSign = sign 
-              puts "Ah... I thought you were a #{@userSign}.".colorize(:magenta)
-              horoscopeChoice
+              @user_sign = sign 
+              add_attributes(sign)
+              puts "Ah... I thought you were a #{@user_sign}.".colorize(:magenta)
+              horoscope_choice
             else 
              puts "hmm.. Let's try again".colorize(:magenta)
             ask_sign
@@ -177,7 +183,7 @@ class HoroscopesCLI::CLI
     end 
     
   def horoscope_choice
-    puts "Would you like to hear the general horoscope, love horoscope or both for #{currentSign.today_date}?(general/love/both)".colorize(:magenta)
+    puts "Would you like to hear the general horoscope, love horoscope or both for #{current_sign.today_date}?(general/love/both)".colorize(:magenta)
     input = gets.strip 
      if input == "general" || input == "General" 
         puts "#{currentSign.horoscope}".colorize(:magenta)
