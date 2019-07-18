@@ -1,23 +1,23 @@
 class HoroscopesCLI::CLI 
-  attr_accessor :userSign
+  attr_accessor :user_sign
   
   #userSign Methods 
   
-  def currentSign
-    HoroscopesCLI::ZodiacSign.find_by_sign(@userSign)
+  def current_sign
+    HoroscopesCLI::ZodiacSign.find_by_sign(@user_sign)
   end 
   
   #call method 
   
   def call
-    makeSigns
-    add_attributes
-    welcomeUser
+    make_signs
+   # add_attributes
+    welcome_user
   end 
   
   #scraping methods
   
-  def makeSigns 
+  def make_signs 
     signs_array = HoroscopesCLI::Scraper.new.scrape_index_page
     HoroscopesCLI::ZodiacSign.create_from_collection(signs_array)
   end 
@@ -37,14 +37,14 @@ class HoroscopesCLI::CLI
   
   #methods the user interacts with
   
-  def welcomeUser
+  def welcome_user
     puts "Welcome to Horoscopes CLI, giving you your daily advice from the stars. Would you like to see a list of the zodiac signs?(yes/no)".colorize(:magenta)
     input = gets.chomp 
-    if input == "yes" || input == "Yes" || input == "y"
+    if yes?(input)
       display_signs
-    elsif input == "no" || input == "No" || input == "n"
+    elsif no?(input)
       askSign 
-    elsif input == "exit" || input == "Exit"
+    elsif user_exit?(input)
       exitProgram
     else 
       puts "Let's try that again...".colorize(:magenta)
@@ -57,7 +57,7 @@ class HoroscopesCLI::CLI
      HoroscopesCLI::ZodiacSign.all.each do |signs|
       puts "#{signs.sign_name}".colorize(:magenta)
      end
-     askSign
+     ask_sign
   end
   
   def yes?(input)
@@ -76,6 +76,14 @@ class HoroscopesCLI::CLI
     end 
   end 
   
+  def user_exit?(input)
+   if input == "exit" || input == "Exit"
+     true 
+   else 
+     false 
+    end 
+  end 
+  
   def sign_prompt
       puts "Could you tell me what your sign is? Be respectful of the zodiac.".colorize(:magenta)
             sign = gets.strip
@@ -85,52 +93,52 @@ class HoroscopesCLI::CLI
               horoscopeChoice
             else 
              puts "hmm.. Let's try again".colorize(:magenta)
-            askSign
+            ask_sign
             end 
   end 
   
-  def askSign
+  def ask_sign
     puts "Do you know your sign?(yes/no)".colorize(:magenta)
     input = gets.strip
     if yes?(input)
         sign_prompt
     elsif no?(input)
-      findUserSign
+      find_user_sign
         if @bday == "exit" || @bday == "exit"
-          exitProgram
+          exit_program
         else 
            puts "Ah... I thought you were a #{@userSign}.".colorize(:magenta)
-          horoscopeChoice
+          horoscope_choice
         end 
-    elsif input == "exit" || input == "Exit"
-      exitProgram
+    elsif user_exit?(input)
+      exit_program
     else 
       puts "I'm not sure I know what you mean.".colorize(:magenta)
-      askSign
+      ask_sign
     end 
   end 
   
-  def newSign
+  def new_sign
     puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)".colorize(:magenta)
       input = gets.strip
      if yes?(input)
       sign_prompt
     elsif no?(input)
-      findUserSign
+      find_user_sign
         if @bday == "exit" || @bday == "exit"
-          exitProgram
+          exit_program
         else 
           puts "Ooh.. a #{userSign}.".colorize(:magenta)
-         horoscopeChoice
+         horoscope_choice
         end 
     else 
       puts "The stars might understand you, but I sure don't".colorize(:magenta)
-      newSign
+      new_sign
     end 
     input = nil 
   end 
   
-  def findUserSign
+  def find_user_sign
     puts "Please tell me the birthday of the person's sign you'd like to check. Give the full name of the month, and the day. For example: August 25, May 2".colorize(:magenta)
     bday = gets.strip 
     @bday = bday
@@ -164,11 +172,11 @@ class HoroscopesCLI::CLI
     elsif bday == "exit" || bday == "exit"
     else 
       puts "I didn't quite get that. Are you sure you capitalized the month and spelled it correctly?".colorize(:magenta)
-      findUserSign
+      find_user_sign
       end 
     end 
     
-  def horoscopeChoice
+  def horoscope_choice
     puts "Would you like to hear the general horoscope, love horoscope or both for #{currentSign.today_date}?(general/love/both)".colorize(:magenta)
     input = gets.strip 
      if input == "general" || input == "General" 
@@ -180,35 +188,35 @@ class HoroscopesCLI::CLI
       elsif input == "both" || input == "Both"
         puts "Here is your general horoscope: #{currentSign.horoscope}".colorize(:magenta)
         puts "Here is your love horoscope: #{currentSign.love_scope}".colorize(:magenta)
-        checkAnotherSign
+        check_another_sign
       elsif input == "exit" || input == "Exit"
-        exitProgram
+        exit_program
       else 
        puts "I'm not sure what you're trying to tell me...".colorize(:magenta)
-       horoscopeChoice
+       horoscope_choice
      end 
    end 
     
-  def checkAnotherSign
+  def check_another_sign
     puts "Would you like to check the horoscope for another sign?(yes/no)".colorize(:magenta)
       input = gets.strip 
-    if input == "yes" || input == "Yes" || input == "y" 
-      newSign
+    if yes?(input)
+      new_sign
     elsif input == "no" || input == "No" || input == "n" || input == "exit" || input == "Exit"
-      exitProgram 
+      exit_program 
     else 
       puts "I'm not sure what you mean...".colorize(:magenta)
-      checkAnotherSign
+      check_another_sign
     end 
   end 
   
-  def exitProgram
+  def exit_program
     puts "Would you like to exit the program?(yes/no)".colorize(:magenta)
     input = gets.strip
-    if input == "yes" || input == "Yes" || input == "y" 
+    if yes?(input)
       bye 
-    elsif input == "no" || input == "No" || input == "n"
-     checkAnotherSign
+    elsif no?(input)
+     check_another_sign
    end 
   end   
     
