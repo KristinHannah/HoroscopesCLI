@@ -100,7 +100,7 @@ class HoroscopesCLI::CLI
         if @bday == "exit" || @bday == "exit"
           exit_program
         else 
-           puts "Ah... I thought you were a #{@user_sign}.".colorize(:magenta)
+           puts "Ah... I thought we were talking about a #{@user_sign}.".colorize(:magenta)
           horoscope_choice
         end 
     elsif user_exit?(input)
@@ -151,7 +151,7 @@ class HoroscopesCLI::CLI
     end 
     
   def horoscope_choice
-    puts "Would you like to hear the general horoscope, love horoscope or both for #{current_sign.today_date}?(general/love/both)".colorize(:magenta)
+    puts "Would you like to hear the general horoscope, love horoscope or both for #{current_sign.sign_name} on #{current_sign.today_date}?(general/love/both)".colorize(:magenta)
     input = gets.strip 
      if input == "general" || input == "General" 
         puts "#{current_sign.horoscope}".colorize(:magenta)
@@ -160,8 +160,8 @@ class HoroscopesCLI::CLI
         puts "#{current_sign.love_scope}".colorize(:magenta)
         check_another_sign
       elsif input == "both" || input == "Both"
-        puts "Here is your general horoscope: #{current_sign.horoscope}".colorize(:magenta)
-        puts "Here is your love horoscope: #{current_sign.love_scope}".colorize(:magenta)
+        puts "Here is the general horoscope: #{current_sign.horoscope}".colorize(:magenta)
+        puts "Here is the love horoscope: #{current_sign.love_scope}".colorize(:magenta)
         check_another_sign
       elsif input == "exit" || input == "Exit"
         exit_program
