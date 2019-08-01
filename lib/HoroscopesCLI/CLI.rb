@@ -28,7 +28,7 @@ class HoroscopesCLI::CLI
   #reused input methods
   
   def yes?(input)
-    if input == "yes" || input == "Yes" || input == "y" 
+    if input == "yes"|| input == "y" 
       true 
     else 
       false 
@@ -36,7 +36,7 @@ class HoroscopesCLI::CLI
   end 
   
   def no?(input)
-    if input == "no" || input == "No" || input == "n" 
+    if input == "no" || input == "n" 
       true 
     else 
       false 
@@ -44,7 +44,7 @@ class HoroscopesCLI::CLI
   end 
   
   def user_exit?(input)
-   if input == "exit" || input == "Exit"
+   if input == "exit" 
      true 
    else 
      false 
@@ -97,7 +97,7 @@ class HoroscopesCLI::CLI
         sign_prompt
     elsif no?(input)
       find_user_sign
-        if @bday == "exit" || @bday == "Exit"
+        if @bday == "exit" 
           exit_program
         else 
            puts "Ah... I thought we were talking about a #{@user_sign}.".colorize(:magenta)
@@ -173,10 +173,10 @@ class HoroscopesCLI::CLI
     
   def check_another_sign
     puts "Would you like to check the horoscope for another sign?(yes/no)".colorize(:magenta)
-      input = gets.strip 
+      input = gets.strip.downcase 
     if yes?(input)
       new_sign
-    elsif input == "no" || input == "No" || input == "n" || input == "exit" || input == "Exit"
+    elsif input == "no" || input == "n" || input == "exit" 
       exit_program 
     else 
       puts "I'm not sure what you mean...".colorize(:magenta)
@@ -186,12 +186,12 @@ class HoroscopesCLI::CLI
   
    def new_sign
     puts "Do you know the sign of the person whose horoscope you want to check?(yes/no)".colorize(:magenta)
-      input = gets.strip
+      input = gets.strip.downcase
      if yes?(input)
       sign_prompt
     elsif no?(input)
       find_user_sign
-        if @bday == "exit" || @bday == "exit"
+        if @bday == "exit" 
           exit_program
         else 
           puts "Ooh.. a #{user_sign}.".colorize(:magenta)
@@ -206,7 +206,7 @@ class HoroscopesCLI::CLI
   
   def exit_program
     puts "Would you like to exit the program?(yes/no)".colorize(:magenta)
-    input = gets.strip
+    input = gets.strip.downcase
     if yes?(input)
       bye 
     elsif no?(input)
