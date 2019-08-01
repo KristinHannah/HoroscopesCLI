@@ -25,7 +25,7 @@ class HoroscopesCLI::Scraper
       daily = general_horoscope[1] 
    sign_atts[:horoscope] = daily
    
-       link_info = html.css("div.grid.grid-right-sidebar div.more-btns.more-horoscopes a#src-horo-btn-love").attribute('href').value
+       link_info = html.css("div.grid.grid-right-sidebar div.more-horoscopes a#src-horo-btn-love.btn-skin").attribute('href').value
    sign_atts[:love_link] = "https://www.horoscope.com" + link_info
    
    sign_atts
