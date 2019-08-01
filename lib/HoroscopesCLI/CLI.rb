@@ -69,7 +69,7 @@ class HoroscopesCLI::CLI
   
   def welcome_user
     puts "Welcome to Horoscopes CLI, giving you your daily advice from the stars. Would you like to see a list of the zodiac signs?(yes/no)".colorize(:magenta)
-    input = gets.chomp 
+    input = gets.chomp.downcase
     if yes?(input)
       display_signs
     elsif no?(input)
@@ -92,12 +92,12 @@ class HoroscopesCLI::CLI
   
   def ask_sign
     puts "Do you know your sign?(yes/no)".colorize(:magenta)
-    input = gets.strip
+    input = gets.strip.downcase
     if yes?(input)
         sign_prompt
     elsif no?(input)
       find_user_sign
-        if @bday == "exit" || @bday == "exit"
+        if @bday == "exit" || @bday == "Exit"
           exit_program
         else 
            puts "Ah... I thought we were talking about a #{@user_sign}.".colorize(:magenta)
@@ -113,36 +113,36 @@ class HoroscopesCLI::CLI
               
   def find_user_sign
     puts "Please tell me the birthday of the person's sign you'd like to check. Give the full name of the month, and the day. For example: August 25, May 2".colorize(:magenta)
-    bday = gets.strip 
+    bday = gets.strip.downcase 
     @bday = bday
     bdaysplit = bday.split(" ")
     month = bdaysplit[0]
     day = bdaysplit[1].to_i 
-      if month == "May" && day.between?(21, 31) || month == "June" && day.between?(1, 20)
+      if month == "may" && day.between?(21, 31) || month == "june" && day.between?(1, 20)
         @user_sign = "gemini"
-      elsif month == "March" && day.between?(21, 31)  || month == "April" && day.between?(1, 19)
+      elsif month == "march" && day.between?(21, 31)  || month == "april" && day.between?(1, 19)
         @user_sign = "aries"
-      elsif month == "April" && day.between?(20, 30) || month == "May" && day.between?(1, 20)
+      elsif month == "april" && day.between?(20, 30) || month == "may" && day.between?(1, 20)
         @user_sign = "taurus"
-      elsif month == "June" && day.between?(21, 31) || month == "July" && day.between?(1, 22)
+      elsif month == "june" && day.between?(21, 31) || month == "july" && day.between?(1, 22)
        @user_sign = "cancer"
-     elsif month == "July" && day.between?(23, 31) || month == "August" && day.between?(1, 22)
+     elsif month == "july" && day.between?(23, 31) || month == "august" && day.between?(1, 22)
         @user_sign = "leo"
-    elsif month == "August" && day.between?(23, 31) || month == "September" && day.between?(1, 22)
+    elsif month == "august" && day.between?(23, 31) || month == "september" && day.between?(1, 22)
         @user_sign = "virgo"
-    elsif month == "September" && day.between?(23, 31) || month == "October" && day.between?(1, 22)
+    elsif month == "september" && day.between?(23, 31) || month == "october" && day.between?(1, 22)
         @user_sign = "libra"
-    elsif month == "October" && day.between?(23, 31) || month == "November" && day.between?(1, 21)
+    elsif month == "october" && day.between?(23, 31) || month == "november" && day.between?(1, 21)
         @user_sign = "scorpio"
-     elsif month == "November" && day.between?(22, 31) || month == "December" && day.between?(1, 21)
+     elsif month == "november" && day.between?(22, 31) || month == "december" && day.between?(1, 21)
         @user_sign = "sagittarius"
-    elsif month == "December" && day.between?(22, 31) || month == "January" && day.between?(1, 19)
+    elsif month == "december" && day.between?(22, 31) || month == "january" && day.between?(1, 19)
         @user_sign = "capricorn"
-    elsif month == "January" && day.between?(20, 31) || month == "February" && day.between?(1, 18)
+    elsif month == "january" && day.between?(20, 31) || month == "february" && day.between?(1, 18)
         @user_sign = "aquarius"
-    elsif month == "February" && day.between?(19, 29) || month == "March" && day.between?(1, 20)
+    elsif month == "february" && day.between?(19, 29) || month == "march" && day.between?(1, 20)
         @user_sign = "pisces"
-    elsif bday == "exit" || bday == "exit"
+    elsif bday == "exit" 
     else 
       puts "I didn't quite get that. Are you sure you capitalized the month and spelled it correctly?".colorize(:magenta)
       find_user_sign
@@ -152,18 +152,18 @@ class HoroscopesCLI::CLI
     
   def horoscope_choice
     puts "Would you like to hear the general horoscope, love horoscope or both for #{current_sign.sign_name} on #{current_sign.today_date}?(general/love/both)".colorize(:magenta)
-    input = gets.strip 
-     if input == "general" || input == "General" 
+    input = gets.strip.downcase
+     if input == "general" 
         puts "#{current_sign.horoscope}".colorize(:magenta)
         check_another_sign
-      elsif input == "love" || input == "Love"
+      elsif input == "love" 
         puts "#{current_sign.love_scope}".colorize(:magenta)
         check_another_sign
-      elsif input == "both" || input == "Both"
+      elsif input == "both" 
         puts "Here is the general horoscope: #{current_sign.horoscope}".colorize(:magenta)
         puts "Here is the love horoscope: #{current_sign.love_scope}".colorize(:magenta)
         check_another_sign
-      elsif input == "exit" || input == "Exit"
+      elsif input == "exit" 
         exit_program
       else 
        puts "I'm not sure what you're trying to tell me...".colorize(:magenta)
